@@ -1,2 +1,0 @@
-# AndroidInterview
-Some Interview hints
