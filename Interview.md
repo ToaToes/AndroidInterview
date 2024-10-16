@@ -2,7 +2,8 @@
 Some Interview hints
 
 ## 1. What is Android
-Based on Linux kernal, operating systems for mobile devices
+Based on Linux kernal, operating systems for mobile devices. </br>
+It is based on the Linux kernel and offers a rich application framework that allows developers to create apps using Java, Kotlin, and other languages.
 
 ## 2. Android Version (What is the latest Android version)
 2024
