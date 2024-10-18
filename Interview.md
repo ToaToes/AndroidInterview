@@ -5,6 +5,27 @@ Some Interview hints
 Based on Linux kernal, operating systems for mobile devices. </br>
 It is based on the Linux kernel and offers a rich application framework that allows developers to create apps using Java, Kotlin, and other languages.
 
+### Activity
+1. has to be registered and declared in AndroidManifest.xml, otherwise it would not be run by the system
+2. Activity usually takes up the whole screen (seperate from other activity)
+3. Lifecycle: Activities have a well-defined lifecycle (created, started, resumed, paused, stopped, destroyed) that you can manage through methods like ```onCreate()```, ```onStart()```, ```onResume()```, etc.
+4. Use Case: Activities are used to present UI elements to the user, such as forms, lists, or media.
+
+### Services
+A Service is a component that runs in the background to perform long-running operations without a user interface: playing Music, downloading files, or handling network operations.
+1. Started Service: Runs in the background indefinitely until explicitly stopped.
+2. Bound Service: Allows components (like Activities) to bind to it and interact with it.
+
+### Broadcast receiver
+
+### Intent <br/>
+When activities communicate with each other, intent been used
+1. An Intent is a messaging object used to request an action from another component in the app or another app.
+
+### Content provider
+1. Definition: A Content Provider manages access to a structured set of data. It serves as an interface for sharing data between different applications.
+2. Use Case: Content Providers are commonly used for accessing data from databases, files, or other structured data sources.
+
 ## 2. Android Version (What is the latest Android version)
 2024
 targetSdk = 34: Where the app is been tested against, Google play has least requirement for targetSdk <br/>
@@ -19,6 +40,12 @@ ART use Ahead-Of-Time (AOT) Compilation: ART uses AOT compilation, which compile
 Also ART has better memory management and garbage collection managment than Dalvik.
 
 ## 4. What is the difference between StateFlow and SharedFlow
+**SharedFlow** : does not hold any state
+
+**StateFlow** : maintains a single current state
+StateFlow is a specialized version of SharedFlow that always holds a current value (the latest state). It is designed for use cases where you need to represent a single piece of state.
+Initial State: Unlike SharedFlow, StateFlow always has an initial value, and it provides immediate access to that value for any new collectors.
+UI State Management: It is particularly useful in MVVM architecture for managing UI state in a way that is lifecycle-aware.
 
 
 ## 5. Change Screen to orientation/horizontal
