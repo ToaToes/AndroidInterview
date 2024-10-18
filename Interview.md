@@ -58,7 +58,57 @@ Use Cases:<br/>
 1. Updating the UI from a background thread.
 2. Managing delayed tasks or periodic updates.
 3. Handling messages and events in a thread-safe manner.
+```
+// Create a Handler associated with the main thread
+Handler handler = new Handler(Looper.getMainLooper()) {
+    @Override
+    public void handleMessage(Message msg) {
+        // Handle the message here
+        // For example, update the UI
+    }
+};
 
-Important Note:<br/>
-When using handlers, be mindful of memory leaks. It's often a good practice to remove callbacks and messages in onDestroy() or when they're no longer needed, especially when working with activities or fragments.<br/>
+// Posting a runnable to the handler
+handler.post(new Runnable() {
+    @Override
+    public void run() {
+        // Code to run on the main thread
+    }
+});
+
+// Sending a message to the handler
+Message message = handler.obtainMessage();
+message.what = 1; // Set message identifier
+handler.sendMessage(message);
+```
+
+### Important Note:<br/>
+When using handlers, be mindful of **memory leaks**. It's often a good practice to remove callbacks and messages in **onDestroy()** or when they're no longer needed, especially when working with activities or fragments.
+
+**TO AVOID MEMORY LEAK:**
+1. Use ```WeakReference``` in the activity: ( If Handler is an inner class of an Activity or Fragment, it holds an implicit reference to the outer class. This can prevent the activity or fragment from being garbage collected.)
+```
+public class MyActivity extends AppCompatActivity {
+    private static class MyHandler extends Handler {
+        private final WeakReference<MyActivity> activityReference;
+
+        MyHandler(MyActivity activity) {
+            activityReference = new WeakReference<>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            MyActivity activity = activityReference.get();
+            if (activity != null) {
+                // Handle the message
+            }
+        }
+    }
+}
+```
+2. remove callbacks and messages, by using ```onDestroy()``` -> ```handler.removeCallbacksAndMessages(null)```
+3. Use Static Handlers: If your handler does not need to interact with the activity or fragment's UI directly, consider using a static inner class and passing a weak reference to the outer class.
+4. Lifecycle-Aware Components: Consider using Android’s architecture components like ViewModel, LiveData, or Kotlin Coroutines, which are designed to handle lifecycle events more effectively and can help avoid common pitfalls associated with Handler.
+
+
 
