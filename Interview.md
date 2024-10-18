@@ -7,16 +7,17 @@ It is based on the Linux kernel and offers a rich application framework that all
 
 ### Activity
 1. has to be registered and declared in AndroidManifest.xml, otherwise it would not be run by the system
-2. Activity usually takes up the whole screen (seperate from other activity)
+2. Activity usually takes up the whole screen (seperate from other activities)
 3. Lifecycle: Activities have a well-defined lifecycle (created, started, resumed, paused, stopped, destroyed) that you can manage through methods like ```onCreate()```, ```onStart()```, ```onResume()```, etc.
 4. Use Case: Activities are used to present UI elements to the user, such as forms, lists, or media.
 
 ### Services
-A Service is a component that runs in the background to perform long-running operations without a user interface: playing Music, downloading files, or handling network operations.
+A Service is a component that runs in the background to perform long-running operations without a user interface: playing Music, downloading files, or handling network operations. <br/>
 1. Started Service: Runs in the background indefinitely until explicitly stopped.
 2. Bound Service: Allows components (like Activities) to bind to it and interact with it.
 
 ### Broadcast receiver
+A Broadcast Receiver listens for system-wide broadcast messages or events, such as battery status changes or incoming SMS messages. <br/>
 
 ### Intent <br/>
 When activities communicate with each other, intent been used
@@ -33,19 +34,26 @@ compileSdk = 34: where the app is been compiled against, cant be lower than targ
 minSdk = 24: Least low version the app supports Sdk lib <br/>
 
 ## 3. What is Dalvik? What is ART, what difference
+Link: https://juejin.cn/post/6844903748058218509 <br/>
 Both runtime environment for Android to execute applications. <br/>
 Modern Runtime: ART replaced Dalvik starting with Android 5.0 (Lollipop). <br/>
 Dalvik use Just-In-Time (JIT) Compilation: It used JIT compilation, meaning that the code is compiled into machine code at runtime. This can lead to slower performance because the compilation happens as the app runs.<br/>
 ART use Ahead-Of-Time (AOT) Compilation: ART uses AOT compilation, which compiles the app’s bytecode into machine code when the app is installed. This leads to faster startup times and improved runtime performance.<br/>
 Also ART has better memory management and garbage collection managment than Dalvik.
 
-## 4. What is the difference between StateFlow and SharedFlow
-**SharedFlow** : does not hold any state
+**Probelms with ART**: installation and upgrade takes more time and more storage room
 
-**StateFlow** : maintains a single current state
-StateFlow is a specialized version of SharedFlow that always holds a current value (the latest state). It is designed for use cases where you need to represent a single piece of state.
-Initial State: Unlike SharedFlow, StateFlow always has an initial value, and it provides immediate access to that value for any new collectors.
-UI State Management: It is particularly useful in MVVM architecture for managing UI state in a way that is lifecycle-aware.
+After Android 7.0, use AOT and JIT combined, faster installation and run, less storage and less battery cosume. 
+
+
+## 4. What is the difference between StateFlow and SharedFlow
+**SharedFlow** _hold no state_ and __
+1. SharedFlow is designed for broadcasting values to multiple collectors. It allows for hot streams that emit values regardless of whether there are active collectors.
+
+**StateFlow** _hold single current state_ and __
+1.  StateFlow is a specialized version of SharedFlow that always holds a current value (the latest state). It is designed for use cases where need to represent a **single** piece of state.
+2.  **Initial State**: Unlike SharedFlow, StateFlow always has an initial value, and it provides immediate access to that value for any new collectors.
+3.  It is particularly useful in **MVVM** architecture for managing UI state in a way that is lifecycle-aware.
 
 
 ## 5. Change Screen to orientation/horizontal
@@ -136,6 +144,12 @@ public class MyActivity extends AppCompatActivity {
 2. remove callbacks and messages, by using ```onDestroy()``` -> ```handler.removeCallbacksAndMessages(null)```
 3. Use Static Handlers: If your handler does not need to interact with the activity or fragment's UI directly, consider using a static inner class and passing a weak reference to the outer class.
 4. Lifecycle-Aware Components: Consider using Android’s architecture components like ViewModel, LiveData, or Kotlin Coroutines, which are designed to handle lifecycle events more effectively and can help avoid common pitfalls associated with Handler.
+
+## 8. Event Streams in Android
+
+## 9.
+
+## 10.
 
 
 
