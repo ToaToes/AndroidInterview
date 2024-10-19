@@ -14,10 +14,13 @@ It is based on the Linux kernel and offers a rich application framework that all
 ### Services
 A Service is a component that runs in the background to perform long-running operations without a user interface: playing Music, downloading files, or handling network operations. <br/>
 1. Started Service: Runs in the background indefinitely until explicitly stopped.
-2. Bound Service: Allows components (like Activities) to bind to it and interact with it.
+2. Bound Service: Allows components (like Activities) to bind to it and interact with it. When 
 
 ### Broadcast receiver
 A Broadcast Receiver listens for system-wide broadcast messages or events, such as battery status changes or incoming SMS messages. <br/>
+1. **dyanamic registered**: When activity, service or app turned off, 
+2. **static registered** in AndroidManifest.xml: can receive broadcasts even when the app is not running. <br/>
+_Now static registered is not available after Android 8.0_
 
 ### Intent <br/>
 When activities communicate with each other, intent been used
