@@ -56,14 +56,76 @@ suspend fun fetchData(): String {
 ## 如何查内存泄露问题？<br/> 
 https://github.com/ToaToes/AndroidDev---Kotlin/blob/main/Memory%20Management.md
 ## 如何切换线程？
-## kotlin标准函数用过吗比如let，
+
+## kotlin标准函数用过吗比如let， -> 主要用来处理可空类型 NULL  可以让代码更加简洁和易读。
+https://medium.com/@khush.panchal123/if-vs-let-in-kotlin-3370077de55d <br/>
+在Kotlin中，let 是一种作用域函数(higher-order function)，用于对对象执行一段代码块。它通常与可空类型一起使用，可以避免空指针异常，并使代码更加简洁。以下是 let 的主要特性和用法。
+```
+val result = someObject?.let { 
+    // 'it' refers to someObject
+    // Perform operations
+    it.someMethod()
+}
+```
+页面navigation get back
+```
+navController.navigate(item.id) {
+    // To get back
+    navController.graph.startDestinationRoute?.let { id ->
+        popUpTo(id) {
+            saveState = true
+        }
+    }
+    launchSingleTop = true
+    restoreState = true
+}
+
+```
+Null Safety:
+
+The expression navController.graph.startDestinationRoute?.let { id -> ... } checks if startDestinationRoute is not null. If it is not null, the block inside let is executed.
+If startDestinationRoute is null, the let block is skipped, preventing any potential null pointer exceptions.
+
+Accessing the Value:
+
+Inside the let block, id refers to the non-null value of startDestinationRoute. This allows you to use id safely without additional null checks.
+
+Encapsulation: (OOP的封装性)
+
+Using let encapsulates the logic for handling the startDestinationRoute, keeping the code clean and focused. It avoids the need for a separate null check before using startDestinationRoute.
+
+Usage:
+1. Safely handle the nullable startDestinationRoute.
+2. Execute the code to pop up to the specified route only when that route is available (i.e., not null).
+
+
 ## 线程并发一般用什么方式实现？
+
 ## 桌面开发里面支持哪些view，
+
 ## kotlin你们主要似乎用来干嘛的?
+
 ## 常用的数据结构李链表熟悉吗，
-## eralist和linklist查找复杂度是什么，
+
+## Arraylist和linklist查找复杂度是什么，
+数组列表（ArrayList） O(1)  - _适合频繁随机访问_ <br/>
+说明: 数组列表是基于数组实现的，可以通过索引直接访问元素，因此查找元素的时间复杂度为常数时间 O(1)。你只需提供索引即可直接获取相应的元素。
+
+链表（LinkedList）O(n) - _频繁插入和删除_ <br/>
+说明: 链表是由一系列节点组成的，每个节点包含一个元素和指向下一个节点的指针。在链表中查找元素时，通常需要从头节点开始逐个遍历，直到找到目标元素，因此查找的时间复杂度为 O(n)，其中 n 是链表中节点的数量。
+
 ## 分别在什么情况下使用，
+数组列表适合快速随机访问，而链表则更适合频繁的插入和删除操作。
+
 ## web前后端有没有做过跟安卓想结合的，
 ## 抽象工厂模式和普通工厂模式有啥区别，
+普通工厂模式 -> 有一个工厂类，负责创建产品的实例。客户代码通过工厂类来获取对象。 _扩展性差_ <br/>
+适用于产品种类较少且变化不大的场景。通常用在简单的对象创建上。
+
+抽象工厂 -> 定义一个抽象工厂接口，多个具体工厂实现该接口。每个工厂可以创建一组相关的产品。 _灵活和扩展性强_ <br/>
+适用于产品族（一组相关产品）较多且经常需要扩展的场景。特别是在需要保证产品的一致性时，例如 UI 组件、数据库连接等。
+
 ## 观察者模式用的多的是观察哪些？
+
 ## 怎么判断一个字符串是一个回文串呢
+.reversed() in python
