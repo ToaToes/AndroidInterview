@@ -50,10 +50,10 @@ After Android 7.0, use AOT and JIT combined, faster installation and run, less s
 
 
 ## 4. What is the difference between StateFlow and SharedFlow
-**SharedFlow** _hold no state_ and __
+**SharedFlow** _hold no state_ and _state management in UI scenarios_
 1. SharedFlow is designed for broadcasting values to multiple collectors. It allows for hot streams that emit values regardless of whether there are active collectors.
 
-**StateFlow** _hold single current state_ and __
+**StateFlow** _hold single current state_ and _event streams or notifications._
 1.  StateFlow is a specialized version of SharedFlow that always holds a current value (the latest state). It is designed for use cases where need to represent a **single** piece of state.
 2.  **Initial State**: Unlike SharedFlow, StateFlow always has an initial value, and it provides immediate access to that value for any new collectors.
 3.  It is particularly useful in **MVVM** architecture for managing UI state in a way that is lifecycle-aware.
