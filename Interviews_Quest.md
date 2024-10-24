@@ -1,6 +1,6 @@
 ## 有没有自己过程线程管理？
 1. Handler 和 HandlerThread
-Handler：可以在主线程与其他线程之间传递消息和任务。使用 Handler 可以在子线程中执行任务并将结果传回主线程。
+Handler：可以在主线程与后台其他线程之间传递消息和任务。使用 Handler 可以在子线程中执行任务并将结果传回主线程。
 HandlerThread：是一个带有 Looper 的线程，可以在其中创建 Handler，用于处理消息。
 2. Kotlin 协程
 Kotlin 协程是处理异步编程的现代方法，使用简单且易于管理。通过 CoroutineScope 和 launch 函数可以轻松启动协程。
