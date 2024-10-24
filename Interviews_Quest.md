@@ -94,6 +94,10 @@ dependencies {
 - 是 Android Jetpack 组件中的一个类，专门用于处理和观察数据的生命周期感知（Lifecycle-aware）对象。它可以帮助开发者轻松地在应用中实现数据的观察和更新，尤其是在与 UI 组件结合时。
 - 允许多个观察者订阅数据变化。当数据发生变化时，所有注册的观察者都会收到通知并更新 UI。 -> 可以简化 UI 更新逻辑。
 - 可以有效防止因界面状态不一致而引发的崩溃。例如，在界面未处于活动状态时更新 UI，将不会导致空指针异常。
+It is designed to hold UI-related data that can be observed within a lifecycle-aware component, such as an Activity or Fragment. <br/>
+Lifecycle Awareness: LiveData is aware of the lifecycle of its observers, meaning it only updates active observers (those in the STARTED or RESUMED state). This helps prevent memory leaks and crashes due to stopped activities trying to update the UI.
+
+
 
 ## 什么是 Data Binding
 - 是 Android Jetpack 组件之一，它使得 _UI 组件和数据源之间的连接更加简单和高效_ 。通过数据绑定，开发者可以直接将布局文件中的 UI 组件绑定到应用程序的数据源，从而简化代码并提高可维护性。
