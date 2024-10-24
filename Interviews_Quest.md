@@ -85,7 +85,7 @@ dependencies {
 ```
 在应用中运行后，LeakCanary 会自动检测内存泄露，并在发现时显示通知。
 3. 检查代码 -> 
-- 有没有用 静态引用 （static instance，和companion object）， 
+- 有没有用 非静态类引用 （static instance，和companion object）， 
 - 有没有removeCallbacksAndMessages（custom handler to weak reference）, 
 - singleton单例模式(使用activity content而不是 app content)，
 - 是否使用weak reference
