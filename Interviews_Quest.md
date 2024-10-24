@@ -90,6 +90,23 @@ dependencies {
 - singleton单例模式(使用activity content而不是 app content)，
 - 是否使用weak reference
 
+## 什么是 Live Data
+- 是 Android Jetpack 组件中的一个类，专门用于处理和观察数据的生命周期感知（Lifecycle-aware）对象。它可以帮助开发者轻松地在应用中实现数据的观察和更新，尤其是在与 UI 组件结合时。
+- 允许多个观察者订阅数据变化。当数据发生变化时，所有注册的观察者都会收到通知并更新 UI。 -> 可以简化 UI 更新逻辑。
+- 可以有效防止因界面状态不一致而引发的崩溃。例如，在界面未处于活动状态时更新 UI，将不会导致空指针异常。
+
+## 什么是 Data Binding
+- 是 Android Jetpack 组件之一，它使得 _UI 组件和数据源之间的连接更加简单和高效_ 。通过数据绑定，开发者可以直接将布局文件中的 UI 组件绑定到应用程序的数据源，从而简化代码并提高可维护性。
+- 简化 UI 更新：通过数据绑定，UI 会自动更新，无需手动调用 findViewById 或设置监听器。
+- 简化代码：数据绑定减少了需要编写的模板代码，例如在 UI 组件上设置数据的代码。
+- UI 组件与数据源之间的双向同步。-> 双向绑定
+```
+在这个示例中，当用户在 EditText 中输入内容并点击提交按钮后，TextView 会显示输入的内容。
+
+用户在 EditText 中输入内容，该内容绑定到 userInput。
+点击按钮时调用 onSubmit() 方法，将 userInput 的值赋给 userName。
+TextView 自动更新显示 userName 的值。
+```
 
 ## 如何切换线程？
 1. use coroutine
@@ -239,3 +256,25 @@ animate*AsState：用于对组件属性进行动画处理。
 
 ## 怎么判断一个字符串是一个回文串呢
 .reversed() in python
+
+## kotlin lambda 表达式
+```
+val greet: () -> String = { "Hello, World!" }
+
+fun main() {
+    println(greet())  // Output: Hello, World!
+}
+
+```
+
+```
+fun main() {
+    val names = listOf("Alice", "Bob", "Charlie")
+
+    // Print each name using forEach with a lambda
+    names.forEach { name -> 
+        println("Hello, $name!")
+    }
+}
+
+```
