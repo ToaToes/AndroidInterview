@@ -57,10 +57,63 @@ suspend fun fetchData(): String {
 适用场景：如果需要进行大量的并发操作，协程是更好的选择；而对于一些底层任务或需要直接与操作系统交互的场景，线程可能更合适。 - 线程->底层交互，协程->else
 
 
-## 有用过代理模式吗？
+## 有用过代理模式吗？ control access to another object (the real subject)
+A proxy can filter, forward, or even **_delay_** the requests of the client before passing them to the target object. 
+This intermediate layer can fulfill different functions, such as _access control_, _lazy initialization_, _logging_, or _caching of requests_ to enhance performance.
+1. 图像加载
+在移动应用中，图像加载常常是一个性能瓶颈。使用代理模式可以延迟图像的加载，直到真正需要时才加载，从而提高应用的响应速度。
+2. 权限控制
+在某些情况下，您可能希望限制对特定资源的访问。代理可以通过权限检查来控制访问。
+3. 缓存代理
+在一些应用中，您可能希望缓存某些数据以提高性能。代理可以实现缓存机制。
+
 ## 如何查内存泄露问题？<br/> 
 https://github.com/ToaToes/AndroidDev---Kotlin/blob/main/Memory%20Management.md
+
+1. 使用 Android Profiler
+Android Studio 提供了内置的内存分析工具，可以实时监控应用的内存使用情况。
+
+2. LeakCanary
+LeakCanary 是一个开源的内存泄露检测库，可以帮助你自动检测内存泄露。
+
+集成 LeakCanary：
+在 build.gradle 文件中添加依赖：
+```
+dependencies {
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.x'
+}
+```
+在应用中运行后，LeakCanary 会自动检测内存泄露，并在发现时显示通知。
+3. 检查代码 -> 
+- 有没有用 静态引用 （static instance，和companion object）， 
+- 有没有removeCallbacksAndMessages（custom handler to weak reference）, 
+- singleton单例模式(使用activity content而不是 app content)，
+- 是否使用weak reference
+
+
 ## 如何切换线程？
+1. use coroutine
+2. 使用 Handler  -> Handler 允许在特定线程中执行代码，通常用于从工作线程发送消息到主线程。 -> 适合与主线程交互
+- 通过将 Runnable 与 Handler 结合使用，你可以轻松地在不同线程之间切换执行任务。
+```
+val handler = Handler(Looper.getMainLooper())
+
+Thread {
+    // 在后台线程中执行耗时操作
+    val result = fetchDataFromNetwork()
+
+    // 切换回主线程更新 UI
+    handler.post {
+        updateUI(result)
+    }
+}.start()
+
+```
+3. 使用 ExecutorService
+通过线程池来管理多个线程。<br/>
+- Running Background Tasks: For tasks that are not UI-related and can run in the background (like network requests, file I/O, etc.). 
+- Handling Multiple Concurrent Tasks: To run multiple tasks at the same time and manage them efficiently.
+
 
 ## kotlin标准函数用过吗比如let， -> 主要用来处理可空类型 NULL  可以让代码更加简洁和易读。
 https://medium.com/@khush.panchal123/if-vs-let-in-kotlin-3370077de55d <br/>
@@ -105,10 +158,44 @@ Usage:
 
 
 ## 线程并发一般用什么方式实现？
+要么就是线程（Thread）要么就是Kotlin Coroutine
+
+通过将 Runnable 与 Handler 结合使用，你可以轻松地在不同线程之间切换执行任务。
+
+使用 ExecutorService 提供的线程池，简化线程管理和任务执行。
 
 ## 桌面开发里面支持哪些view，
+主要就是用的jetpack compose。 
+1. 基础组件
+Text：用于显示文本。
+Button：按钮组件。
+Image：显示图像。
+Icon：用于显示图标。
+TextField：单行或多行文本输入框。
+Checkbox：复选框。
+RadioButton：单选按钮。
+Switch：开关按钮。
+Slider：滑动条。
+2. 布局组件
+Column：垂直排列子组件。
+Row：水平排列子组件。
+Box：允许子组件重叠，可以设置层级。
+LazyColumn：支持懒加载的垂直列表。
+LazyRow：支持懒加载的水平列表。
+Grid：用于创建网格布局（LazyVerticalGrid 和 LazyHorizontalGrid）。
+Scaffold：提供基本的页面结构，包括顶部栏、底部栏等。
+3. 高级组件
+Dialog：用于显示对话框。
+Snackbar：用于展示短暂的信息提示。
+BottomSheet：用于显示底部弹出面板。
+Navigation：支持应用的导航组件，结合 NavHost 和 NavGraph。
+4. 动画组件
+AnimatedVisibility：用于管理组件的可见性和动画。
+animate*AsState：用于对组件属性进行动画处理。
 
 ## kotlin你们主要似乎用来干嘛的?
+- 多平台开发 以及 安卓开发
+- kotlin for multiple platform
 
 ## 常用的数据结构李链表熟悉吗，
 
@@ -123,6 +210,12 @@ Usage:
 数组列表适合快速随机访问，而链表则更适合频繁的插入和删除操作。
 
 ## web前后端有没有做过跟安卓想结合的，
+1. OAuth 认证 -> google firebase database
+在需要用户认证的场景下，可以使用 OAuth 2.0 进行安全的身份验证。后端管理用户登录，并通过访问令牌允许 Android 应用访问保护资源。
+
+2. RESTful API -> Retrofit and OkHttps
+
+
 ## 抽象工厂模式和普通工厂模式有啥区别，
 普通工厂模式 -> 有一个工厂类，负责创建产品的实例。客户代码通过工厂类来获取对象。 _扩展性差_ <br/>
 适用于产品种类较少且变化不大的场景。通常用在简单的对象创建上。
@@ -131,6 +224,18 @@ Usage:
 适用于产品族（一组相关产品）较多且经常需要扩展的场景。特别是在需要保证产品的一致性时，例如 UI 组件、数据库连接等。
 
 ## 观察者模式用的多的是观察哪些？
+1. 事件通知系统
+在 GUI 应用中，用户的操作（如按钮点击、输入框变化）可以触发事件，观察者模式可用于处理这些事件通知。
+
+2. 数据变化通知
+在模型-视图-控制器（MVC）或模型-视图-视图模型（MVVM）架构中，当数据模型发生变化时，视图需要更新。
+
+示例：在 Android 应用中，LiveData 和 ViewModel 结合使用，ViewModel 作为数据的源头，观察者为 UI 组件。
+
+3. 推送通知系统
+在分布式系统或实时应用中，服务器可以向多个客户端推送消息或通知。
+
+示例：即时通讯应用中的消息通知。
 
 ## 怎么判断一个字符串是一个回文串呢
 .reversed() in python
