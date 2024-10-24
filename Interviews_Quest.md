@@ -4,14 +4,19 @@ Handler：可以在主线程与其他线程之间传递消息和任务。使用 
 HandlerThread：是一个带有 Looper 的线程，可以在其中创建 Handler，用于处理消息。
 2. Kotlin 协程
 Kotlin 协程是处理异步编程的现代方法，使用简单且易于管理。通过 CoroutineScope 和 launch 函数可以轻松启动协程。
-kotlin
-Copy code
+
+引入依赖 <br/>
+使用 GlobalScope 或 lifecycleScope <br/>
+定义suspend -> 使用launch
+
+```
 GlobalScope.launch(Dispatchers.Main) {
     val result = withContext(Dispatchers.IO) {
         // 执行耗时操作
     }
     // 更新 UI
 }
+```
 3. WorkManager
 WorkManager 是用于处理后台任务的推荐方式，尤其适合需要保证任务完成的场景。它可以处理定期任务和链式任务。
 ```
