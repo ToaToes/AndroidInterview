@@ -286,3 +286,38 @@ fun main() {
 ## Activity A to Activity B and then Back to Activity A
 When Activity A, activity will be at resume(), when swtiching be at pause(), get back will be at resume() again
 
+## 有没有用过SurfaceView in compose UI
+
+
+## Retrofit and Okhttps - 代码简单  - Retrofit 通常是基于 OkHttp 构建的，利用 OkHttp 提供的功能来处理底层的网络请求
+1. Retrofit 是一个类型安全的 HTTP 客户端，用于 Android 和 Java。它简化了与 REST API 的交互，使开发者能够通过注解来定义 API 接口，从而更容易地发送网络请求并处理响应。
+2. OkHttp 是一个高效的 HTTP 和 HTTP/2 客户端，用于 Android 和 Java。它为网络请求提供了底层支持，并且处理请求和响应的性能非常出色。
+
+## 什么是 LaunchEffect in Kotlin
+LaunchedEffect 是 Jetpack Compose 中用于处理副作用的一个函数，主要用于在组合过程中启动协程。它是一个组合函数，可以在其范围内执行协程代码，并且会在指定的键值发生变化时重新启动。
+```
+import androidx.compose.runtime.*
+import kotlinx.coroutines.delay
+
+@Composable
+fun MyComponent() {
+    var count by remember { mutableStateOf(0) }
+
+    // 每当 count 变化时，启动这个副作用
+    LaunchedEffect(count) {
+        // 执行一些异步操作
+        delay(1000)  // 模拟网络请求
+        println("Count is now: $count")
+    }
+
+    // UI 组件
+    Button(onClick = { count++ }) {
+        Text("Increment Count")
+    }
+}
+
+```
+
+## Launch 和 LaunchEffect 的区别
+Launch - 适合非UI操作
+LaunchEffect - 适合UI操作
