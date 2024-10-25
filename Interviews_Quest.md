@@ -282,3 +282,7 @@ fun main() {
 }
 
 ```
+
+## Activity A to Activity B and then Back to Activity A
+When Activity A, activity will be at resume(), when swtiching be at pause(), get back will be at resume() again
+
