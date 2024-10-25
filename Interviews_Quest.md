@@ -287,6 +287,11 @@ fun main() {
 When Activity A, activity will be at resume(), when swtiching be at pause(), get back will be at resume() again
 
 ## 有没有用过SurfaceView in compose UI
+SurfaceView 是 Android 中的一种视图，它提供了一个可用于绘制和显示内容的表面，通常用于需要快速更新的图形或视频，例如游戏、视频播放和摄像头预览。
+
+1. 独立的绘制线程：SurfaceView 允许在单独的线程中绘制内容，从而提高性能，减少主线程的负担。
+2. 透明背景：它可以具有透明背景，适用于需要在其他视图上方显示内容的情况。
+3. 双缓冲：SurfaceView 使用双缓冲技术，可以减少绘制时的闪烁现象。
 
 
 ## Retrofit and Okhttps - 代码简单  - Retrofit 通常是基于 OkHttp 构建的，利用 OkHttp 提供的功能来处理底层的网络请求
@@ -321,3 +326,7 @@ fun MyComponent() {
 ## Launch 和 LaunchEffect 的区别
 Launch - 适合非UI操作
 LaunchEffect - 适合UI操作
+
+## 动画模组 in kotlin
+
+
