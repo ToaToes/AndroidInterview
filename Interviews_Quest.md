@@ -284,7 +284,14 @@ fun main() {
 ```
 
 ## Activity A to Activity B and then Back to Activity A
-When Activity A, activity will be at resume(), when swtiching be at pause(), get back will be at resume() again
+1. **Transition from Activity A to Activity B**
+onPause(): When you start Activity B, Activity A first enters the onPause() stage. This means Activity A is still partially visible (if it has a dialog, for example) but is losing focus.
+This is where you would typically pause any ongoing tasks or animations.
+2. **Transition Back to Activity A**
+- ```onRestart()```: This method is called when Activity A is coming back to the foreground after being stopped. This is where you can re-initialize any components that need to be set up again.
+- ```onStart()```: After onRestart(), Activity A goes to the onStart() stage, indicating that it is now visible to the user but not yet in the foreground.
+- ```onResume()```: Finally, Activity A transitions to onResume(), at which point it is fully active and in the foreground, ready for user interaction.
+- ```onStop()```: After onPause(), Activity A transitions to onStop(), indicating that it is now completely hidden from the user. At this point, it is no longer visible on the screen.
 
 ## 有没有用过SurfaceView in compose UI
 SurfaceView 是 Android 中的一种视图，它提供了一个可用于绘制和显示内容的表面，通常用于需要快速更新的图形或视频，例如游戏、视频播放和摄像头预览。
