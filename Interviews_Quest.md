@@ -283,7 +283,7 @@ fun main() {
 
 ```
 
-## Activity A to Activity B and then Back to Activity A
+## Activity A to Activity B and then Back to Activity A - the only difference between fragments a/b, is that no restart() for fragments in lifecycle
 1. **Transition from Activity A to Activity B**
 onPause(): When you start Activity B, Activity A first enters the onPause() stage. This means Activity A is still partially visible (if it has a dialog, for example) but is losing focus.
 This is where you would typically pause any ongoing tasks or animations.
