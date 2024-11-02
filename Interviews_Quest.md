@@ -336,4 +336,10 @@ LaunchEffect - 适合UI操作
 
 ## 动画模组 in kotlin
 
+## Mutable class and Immutable class in Java
 
+1. State Change: Mutable classes can change their state; immutable classes cannot.
+2. Thread Safety: Immutable classes are inherently thread-safe since their state cannot be changed once created.
+**3. Memory Usage**: Mutable objects can be more memory-efficient as they can modify their state without creating new instances. Immutable objects may create multiple instances,
+which could lead to increased memory usage in certain scenarios.
+5. Design: Immutable classes tend to lead to simpler, more predictable code, while mutable classes may offer more flexibility.
